@@ -1,0 +1,2480 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+<meta name="theme-color" content="#1a3a3a" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0b1818" media="(prefers-color-scheme: dark)" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="South of France" />
+<meta name="mobile-web-app-capable" content="yes" />
+<title>South of France · Beukelman 2026</title>
+
+<!-- Inline manifest via data URI so this stays a single file -->
+<link id="manifest-link" rel="manifest" />
+
+<!-- Apple touch icon via inline SVG -->
+<link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%231a3a3a'/><stop offset='1' stop-color='%23d97757'/></linearGradient></defs><rect width='180' height='180' rx='40' fill='url(%23g)'/><text x='50%25' y='52%25' text-anchor='middle' font-family='Georgia,serif' font-size='52' font-style='italic' fill='%23f5ede1' dominant-baseline='middle'>SoF</text><text x='50%25' y='78%25' text-anchor='middle' font-family='Georgia,serif' font-size='14' fill='%23f5ede1' opacity='0.85' letter-spacing='3'>MAY · 2026</text></svg>" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   THEME
+   Travel-app aesthetic: warm linen + deep pine + sunset terracotta.
+   Inspired by Provençal earthenware, hand-painted ceramic tiles,
+   and the worn-stone palette of Les Baux. Restrained, not flashy.
+   ============================================================ */
+:root {
+  /* Light mode (default) */
+  --bg: #f5ede1;            /* warm linen */
+  --bg-elev: #fbf6ec;       /* card */
+  --bg-sunk: #ece2d2;       /* recessed/sticky */
+  --ink: #1a1a1a;
+  --ink-2: #4a4a4a;
+  --ink-3: #888178;
+  --line: #e3d8c4;
+  --line-strong: #c9bba2;
+  --accent: #1a3a3a;        /* deep pine */
+  --accent-soft: #d3dbd5;
+  --warm: #d97757;          /* terracotta */
+  --warm-soft: #f0d9c8;
+  --gold: #b58a3a;
+  --danger: #b3493b;
+  --shadow-sm: 0 1px 2px rgba(60, 40, 20, 0.06);
+  --shadow-md: 0 4px 16px rgba(60, 40, 20, 0.08);
+  --shadow-lg: 0 12px 40px rgba(60, 40, 20, 0.12);
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --tap: 44px;
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e1818;
+    --bg-elev: #182525;
+    --bg-sunk: #0a1212;
+    --ink: #f0e8db;
+    --ink-2: #c8bfb0;
+    --ink-3: #7a7568;
+    --line: #28342f;
+    --line-strong: #3a4842;
+    --accent: #e8d9b8;        /* warm cream as accent in dark */
+    --accent-soft: #2a3a36;
+    --warm: #e8957a;
+    --warm-soft: #3a2a22;
+    --gold: #d4a857;
+    --danger: #e07565;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.4);
+    --shadow-lg: 0 12px 40px rgba(0,0,0,0.5);
+  }
+}
+
+[data-theme="light"] {
+  --bg: #f5ede1; --bg-elev: #fbf6ec; --bg-sunk: #ece2d2;
+  --ink: #1a1a1a; --ink-2: #4a4a4a; --ink-3: #888178;
+  --line: #e3d8c4; --line-strong: #c9bba2;
+  --accent: #1a3a3a; --accent-soft: #d3dbd5;
+  --warm: #d97757; --warm-soft: #f0d9c8;
+  --gold: #b58a3a; --danger: #b3493b;
+}
+[data-theme="dark"] {
+  --bg: #0e1818; --bg-elev: #182525; --bg-sunk: #0a1212;
+  --ink: #f0e8db; --ink-2: #c8bfb0; --ink-3: #7a7568;
+  --line: #28342f; --line-strong: #3a4842;
+  --accent: #e8d9b8; --accent-soft: #2a3a36;
+  --warm: #e8957a; --warm-soft: #3a2a22;
+  --gold: #d4a857; --danger: #e07565;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior-y: contain;
+}
+body {
+  min-height: 100svh;
+  padding-bottom: calc(72px + var(--safe-b)); /* room for tab bar */
+}
+
+/* Decorative paper grain — very subtle, never obtrusive */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.3  0 0 0 0 0.25  0 0 0 0 0.18  0 0 0 0.025 0'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>");
+  opacity: 0.7;
+  mix-blend-mode: multiply;
+}
+[data-theme="dark"] body::before, @media (prefers-color-scheme: dark) {}
+@media (prefers-color-scheme: dark) {
+  body::before { mix-blend-mode: screen; opacity: 0.35; }
+}
+
+button, a.btn {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+a { color: var(--accent); text-decoration: none; }
+a:active { opacity: 0.7; }
+
+/* ============================================================
+   APP SHELL
+   ============================================================ */
+#app {
+  position: relative;
+  z-index: 1;
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100svh;
+}
+@media (min-width: 720px) {
+  #app { max-width: 560px; }
+}
+
+/* Top app bar */
+.appbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  padding: calc(var(--safe-t) + 12px) 20px 12px;
+  border-bottom: 1px solid var(--line);
+}
+.appbar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 0;
+}
+.brand-mark {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: -0.01em;
+  flex: none;
+}
+.brand-sub {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.theme-toggle {
+  width: var(--tap);
+  height: var(--tap);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--ink-2);
+}
+.theme-toggle:hover { color: var(--accent); }
+.theme-toggle svg { width: 20px; height: 20px; }
+
+/* Page wrapper */
+.page {
+  padding: 8px 20px 20px;
+  animation: page-in 0.28s ease-out;
+}
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Generic typography */
+.h-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 600;
+}
+.h-display {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 4px 0 16px;
+}
+.h-display em { font-style: italic; color: var(--warm); font-weight: 400; }
+.h-section {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 28px 0 12px;
+  color: var(--ink);
+}
+.h-section em { font-style: italic; }
+
+/* ============================================================
+   BOTTOM TAB BAR
+   ============================================================ */
+.tabbar {
+  position: fixed;
+  left: 0; right: 0;
+  bottom: 0;
+  z-index: 40;
+  padding: 8px 12px calc(var(--safe-b) + 8px);
+  background: color-mix(in srgb, var(--bg-elev) 92%, transparent);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-top: 1px solid var(--line);
+}
+.tabbar-inner {
+  max-width: 480px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+}
+.tab {
+  height: 56px;
+  min-width: var(--tap);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: var(--ink-3);
+  border-radius: var(--radius-sm);
+  transition: color 0.15s, background 0.15s;
+}
+.tab:active { background: var(--bg-sunk); }
+.tab[aria-selected="true"] { color: var(--accent); }
+.tab svg { width: 22px; height: 22px; }
+.tab-label { font-size: 10.5px; font-weight: 600; letter-spacing: 0.02em; }
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.card {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.card-pad { padding: 16px 18px; }
+
+/* ============================================================
+   TODAY VIEW
+   ============================================================ */
+.today-hero {
+  margin: 4px 0 20px;
+}
+.today-date {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 600;
+}
+.today-headline {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin: 6px 0 10px;
+  color: var(--ink);
+}
+.today-headline em { font-style: italic; color: var(--warm); font-weight: 400; }
+.today-sub {
+  font-size: 15px;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+
+.event-band {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 18px 0 10px;
+}
+.event-band-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.event-band-line {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+.event-band-label.now { color: var(--warm); }
+
+/* Event card */
+.event {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+.event.now {
+  border-color: var(--warm);
+  box-shadow: 0 0 0 3px var(--warm-soft), var(--shadow-md);
+}
+.event.dim {
+  opacity: 0.62;
+  background: transparent;
+}
+.event.dim .event-title { font-weight: 400; }
+.event-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.event-time {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  flex: none;
+  white-space: nowrap;
+}
+.event-time .tz {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--ink-3);
+  letter-spacing: 0.08em;
+  margin-left: 4px;
+}
+.event-type {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 100px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  flex: none;
+}
+.event-type.flight { background: color-mix(in srgb, var(--gold) 22%, transparent); color: var(--gold); }
+.event-type.hotel { background: var(--accent-soft); color: var(--accent); }
+.event-type.car { background: color-mix(in srgb, var(--warm) 18%, transparent); color: var(--warm); }
+.event-type.activity { background: color-mix(in srgb, var(--gold) 18%, transparent); color: var(--gold); }
+.event-type.dining { background: color-mix(in srgb, var(--warm) 20%, transparent); color: var(--warm); }
+.event-title {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 8px 0 4px;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+.event-sub {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  line-height: 1.45;
+}
+.event-meta {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: var(--bg-sunk);
+  color: var(--ink-2);
+  border: 1px solid var(--line);
+}
+.chip svg { width: 12px; height: 12px; }
+.chip.flag {
+  background: color-mix(in srgb, var(--danger) 12%, transparent);
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 30%, transparent);
+}
+
+/* Action buttons row */
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+}
+.btn-action {
+  height: var(--tap);
+  min-width: var(--tap);
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 100px;
+  background: var(--bg-sunk);
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
+  transition: transform 0.1s, background 0.15s;
+}
+.btn-action:active { transform: scale(0.96); }
+.btn-action.primary {
+  background: var(--accent);
+  color: var(--bg-elev);
+  border-color: var(--accent);
+}
+[data-theme="dark"] .btn-action.primary, .btn-action.primary {
+  background: var(--accent);
+  color: var(--bg);
+}
+.btn-action.call {
+  background: color-mix(in srgb, var(--warm) 16%, transparent);
+  color: var(--warm);
+  border-color: color-mix(in srgb, var(--warm) 35%, transparent);
+}
+.btn-action svg { width: 16px; height: 16px; }
+
+.empty {
+  padding: 28px 20px;
+  text-align: center;
+  color: var(--ink-3);
+  font-size: 14px;
+}
+.empty-emoji { font-size: 30px; margin-bottom: 8px; opacity: 0.7; }
+
+/* ============================================================
+   ITINERARY VIEW
+   ============================================================ */
+.day-group {
+  margin-bottom: 14px;
+}
+.day-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  min-height: var(--tap);
+  text-align: left;
+  transition: background 0.15s;
+}
+.day-header:active { background: var(--bg-sunk); }
+.day-header[aria-expanded="true"] {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-color: transparent;
+}
+.day-header.today {
+  border-color: var(--warm);
+  box-shadow: 0 0 0 2px var(--warm-soft);
+}
+.day-num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ink-3);
+  font-weight: 500;
+}
+.day-date {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-top: 1px;
+}
+.day-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.day-count svg { width: 16px; height: 16px; transition: transform 0.2s; }
+.day-header[aria-expanded="true"] .day-count svg { transform: rotate(180deg); }
+.day-body {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-top: none;
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+  padding: 4px 12px 12px;
+  display: none;
+}
+.day-body.open { display: block; animation: expand 0.22s ease-out; }
+@keyframes expand {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.stop {
+  padding: 14px 6px;
+  border-bottom: 1px solid var(--line);
+}
+.stop:last-child { border-bottom: none; }
+.stop-row1 {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.stop-time {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent);
+  flex: none;
+  min-width: 58px;
+  padding-top: 2px;
+}
+.stop-time .tz {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--ink-3);
+  letter-spacing: 0.08em;
+  display: block;
+  margin-top: 1px;
+}
+.stop-main { flex: 1; min-width: 0; }
+.stop-type {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.stop-title {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--ink);
+  margin: 2px 0 2px;
+}
+.stop-sub {
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.4;
+}
+
+.detail-list {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: var(--bg-sunk);
+  border-radius: var(--radius-sm);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 12px;
+  font-size: 13px;
+}
+.detail-list dt {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  align-self: center;
+}
+.detail-list dd {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--sans);
+  word-break: break-word;
+}
+.detail-list dd.mono { font-family: ui-monospace, Menlo, monospace; font-size: 12.5px; }
+.detail-list dd.muted { color: var(--ink-3); }
+
+/* ============================================================
+   MAP VIEW
+   ============================================================ */
+.map-wrap {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 16px;
+}
+.map-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 5 / 3;
+  background: linear-gradient(135deg, #e8d9b8 0%, #d3c8a8 50%, #c4b894 100%);
+}
+[data-theme="dark"] .map-svg {
+  background: linear-gradient(135deg, #1a2530 0%, #14202a 50%, #0e1820 100%);
+}
+@media (prefers-color-scheme: dark) {
+  .map-svg { background: linear-gradient(135deg, #1a2530 0%, #14202a 50%, #0e1820 100%); }
+}
+
+.map-pin {
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.map-pin:active { transform: scale(0.92); }
+.map-pin-circle {
+  fill: var(--bg-elev);
+  stroke: var(--accent);
+  stroke-width: 2.5;
+}
+.map-pin.active .map-pin-circle {
+  fill: var(--warm);
+  stroke: var(--warm);
+}
+.map-pin-num {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 13px;
+  fill: var(--accent);
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+}
+.map-pin-label {
+  font-family: var(--sans);
+  font-size: 10.5px;
+  font-weight: 600;
+  fill: var(--ink);
+  pointer-events: none;
+  paint-order: stroke;
+  stroke: var(--bg-elev);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+[data-theme="dark"] .map-pin-label, @media (prefers-color-scheme: dark) {}
+.map-pin.active .map-pin-num { fill: var(--bg-elev); }
+.map-route {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.8;
+  stroke-dasharray: 4 3;
+  opacity: 0.45;
+}
+
+.map-list { margin-top: 12px; }
+.map-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 12px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  margin-bottom: 8px;
+  box-shadow: var(--shadow-sm);
+  min-height: var(--tap);
+  width: 100%;
+  text-align: left;
+}
+.map-list-item:active { background: var(--bg-sunk); }
+.map-list-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 14px;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.map-list-main { flex: 1; min-width: 0; }
+.map-list-title {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.25;
+}
+.map-list-sub {
+  font-size: 12.5px;
+  color: var(--ink-3);
+  margin-top: 2px;
+}
+
+/* ============================================================
+   SUGGESTIONS VIEW
+   ============================================================ */
+.sug-intro {
+  font-size: 14px;
+  color: var(--ink-2);
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+.sug-intro strong { color: var(--warm); font-weight: 600; }
+
+.sug-leg {
+  margin-bottom: 24px;
+}
+.sug-leg-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.sug-leg-title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.sug-leg-dates {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.sug {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow-sm);
+}
+.sug-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 100px;
+  background: var(--warm-soft);
+  color: var(--warm);
+  margin-bottom: 8px;
+}
+.sug-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 0 0 6px;
+}
+.sug-why {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.sug-why::before {
+  content: '"';
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--warm);
+  margin-right: 2px;
+}
+.sug-why::after { content: '"'; font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--warm); margin-left: 2px; }
+
+.sug-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+/* ============================================================
+   SEARCH
+   ============================================================ */
+.search-wrap {
+  position: relative;
+  margin-bottom: 14px;
+}
+.search-input {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px 0 44px;
+  border-radius: 100px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+  outline: none;
+}
+.search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.search-input::placeholder { color: var(--ink-3); }
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: var(--ink-3);
+  pointer-events: none;
+}
+.search-clear {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: none;
+  place-items: center;
+  color: var(--ink-3);
+}
+.search-clear.show { display: grid; }
+.search-clear:active { background: var(--bg-sunk); }
+.search-results {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+mark.hl { background: color-mix(in srgb, var(--warm) 28%, transparent); color: var(--ink); padding: 0 2px; border-radius: 3px; }
+
+/* ============================================================
+   OFFLINE / STATUS PILL
+   ============================================================ */
+.status-pill {
+  position: fixed;
+  bottom: calc(80px + var(--safe-b));
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: var(--bg);
+  padding: 8px 16px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 600;
+  z-index: 60;
+  box-shadow: var(--shadow-lg);
+  display: none;
+  animation: pop-in 0.25s ease-out;
+}
+.status-pill.show { display: block; }
+.status-pill.offline { background: var(--danger); color: white; }
+@keyframes pop-in {
+  from { opacity: 0; transform: translate(-50%, 6px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* ============================================================
+   FOOTER / META
+   ============================================================ */
+.footer-note {
+  margin: 28px 0 8px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--ink-3);
+  letter-spacing: 0.08em;
+  font-style: italic;
+  font-family: var(--serif);
+}
+
+/* Decorative top hairline rule (Provençal flair) */
+.rule-ornate {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0;
+  color: var(--ink-3);
+}
+.rule-ornate::before, .rule-ornate::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
+}
+.rule-ornate-mark { font-family: var(--serif); font-style: italic; font-size: 13px; }
+
+/* Hide pages that aren't active */
+.page[hidden] { display: none; }
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ============================ TOP APP BAR ============================ -->
+  <header class="appbar">
+    <div class="appbar-row">
+      <div class="brand">
+        <span class="brand-mark">South of France</span>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+    </div>
+    <div class="brand-sub" id="appbarSub">Erica & Joel · May 19 – Jun 1, 2026</div>
+  </header>
+
+  <!-- ============================ PAGES ============================ -->
+  <main>
+    <section class="page" id="page-today"></section>
+    <section class="page" id="page-itinerary" hidden></section>
+    <section class="page" id="page-map" hidden></section>
+    <section class="page" id="page-suggest" hidden></section>
+    <section class="page" id="page-search" hidden></section>
+  </main>
+
+  <!-- Status pill for offline / installed -->
+  <div class="status-pill" id="statusPill"></div>
+
+  <!-- ============================ BOTTOM TAB BAR ============================ -->
+  <nav class="tabbar" role="tablist">
+    <div class="tabbar-inner">
+      <button class="tab" role="tab" aria-selected="true" data-tab="today">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <span class="tab-label">Today</span>
+      </button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="itinerary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        <span class="tab-label">Trip</span>
+      </button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="map">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+        <span class="tab-label">Map</span>
+      </button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="suggest">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 6.9 7.3.6-5.5 4.8 1.7 7.1L12 17.8 6.1 21.4l1.7-7.1L2.3 9.5l7.3-.6z"/></svg>
+        <span class="tab-label">Ideas</span>
+      </button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <span class="tab-label">Search</span>
+      </button>
+    </div>
+  </nav>
+
+</div>
+
+<script>
+/* =============================================================
+   TRIP DATA — extracted from TripIt PDF + Google Maps + prior chats.
+   Stored as a flat list of events; each event has a date, local time,
+   IANA-style timezone, coordinates, and rich metadata. All times are
+   stored as the *local wall time* at the event location.
+   ============================================================= */
+const TRIP = {
+  meta: {
+    title: 'South of France',
+    travelers: ['Erica Beukelman', 'Joel Beukelman'],
+    start: '2026-05-19',
+    end: '2026-06-01',
+    homeBase: 'Nashville, TN',
+  },
+
+  /* Hotel "stays" — referenced by events; have coords */
+  stays: {
+    hameau: {
+      id: 'hameau',
+      name: 'Hameau des Baux',
+      shortName: 'Hameau des Baux',
+      region: 'Provence — Paradou',
+      address: '285 Chem. de Bourgeac, 13520 Paradou, France',
+      phone: '+33 4 48 70 00 23',
+      website: 'https://www.les-petites-maisons.com/',
+      conf: '416435546',
+      lat: 43.7269011, lng: 4.7882359, tz: 'Europe/Paris', tzAbbr: 'CEST',
+    },
+    liautaud: {
+      id: 'liautaud',
+      name: 'Hôtel Liautaud Cassis',
+      shortName: 'Hôtel Liautaud',
+      region: 'Cassis',
+      address: 'Rue Marcel Barthélémy, 13260 Cassis, France',
+      phone: '+33 4 51 68 02 02',
+      website: 'https://www.hotelliautaudcassis.com/',
+      conf: 'KBSHPP',
+      lat: 43.2140091, lng: 5.5384713, tz: 'Europe/Paris', tzAbbr: 'CEST',
+    },
+    rochesRouges: {
+      id: 'rochesRouges',
+      name: 'Les Roches Rouges',
+      shortName: 'Les Roches Rouges',
+      region: 'Saint-Raphaël',
+      address: '90 Bd de la 36e Division du Texas, 83700 Saint-Raphaël, France',
+      phone: null,
+      website: 'https://www.beaumier.com/en/properties/les-roches-rouges-hotel/',
+      conf: '459067670',
+      lat: 43.4168663, lng: 6.837302, tz: 'Europe/Paris', tzAbbr: 'CEST',
+    },
+    albert: {
+      id: 'albert',
+      name: 'Hôtel Albert 1er',
+      shortName: 'Hôtel Albert 1er',
+      region: 'Nice',
+      address: '4 Av. Max Gallo, 06300 Nice, France',
+      phone: '+33 4 93 85 74 01',
+      website: 'https://www.hotel-albert-1er.com/',
+      conf: '73415476340256',
+      lat: 43.6958915, lng: 7.2693671, tz: 'Europe/Paris', tzAbbr: 'CEST',
+    },
+    couvent: {
+      id: 'couvent',
+      name: 'Hôtel du Couvent',
+      shortName: 'Hôtel du Couvent',
+      region: 'Nice — Vieux Nice',
+      address: '1 Rue Honoré Ugo, 06300 Nice, France',
+      phone: '+33 4 12 05 55 60',
+      website: 'https://www.marriott.com/en-us/hotels/ncehc-hotel-du-couvent-a-luxury-collection-hotel-nicefrance/overview/',
+      conf: '2432189749',
+      lat: 43.6971767, lng: 7.2788356, tz: 'Europe/Paris', tzAbbr: 'CEST',
+    },
+  },
+
+  /* All events, chronological. date is the LOCAL date at the venue. */
+  events: [
+    /* ============= ERICA's outbound ============= */
+    {
+      id: 'dl3142-out', type: 'flight', who: 'Erica',
+      date: '2026-05-20', time: '14:47', endDate: '2026-05-20', endTime: '17:00',
+      tz: 'America/Chicago', tzAbbr: 'CDT',
+      title: 'BNA → ATL · DL 3142',
+      subtitle: 'Departs Nashville',
+      lat: 36.1245, lng: -86.6782,
+      meta: {
+        Flight: 'Delta 3142',
+        Route: 'Nashville (BNA) → Atlanta (ATL)',
+        Departs: '2:47 PM CDT',
+        Arrives: '5:00 PM EDT',
+        Duration: '1h 13m',
+        Aircraft: 'Boeing 717-200',
+        Confirmation: 'GQ9Y2B',
+        Passenger: 'Erica Beukelman',
+      },
+    },
+    {
+      id: 'dl24-out-erica', type: 'flight', who: 'Erica',
+      date: '2026-05-20', time: '20:50', endDate: '2026-05-21', endTime: '12:00',
+      endTz: 'Europe/Paris',
+      tz: 'America/New_York', tzAbbr: 'EDT',
+      title: 'ATL → NCE · DL 24',
+      subtitle: 'Transatlantic to Nice',
+      lat: 33.6407, lng: -84.4277,
+      meta: {
+        Flight: 'Delta 24',
+        Route: 'Atlanta (ATL) → Nice (NCE)',
+        Departs: '8:50 PM EDT · Terminal I, Gate E16',
+        Arrives: '12:00 PM CEST (next day)',
+        Duration: '9h 10m',
+        Aircraft: 'Boeing 767-400',
+        Confirmation: 'GQ9Y2B',
+        Passenger: 'Erica Beukelman',
+      },
+    },
+
+    /* ============= Thu May 21 — Erica lands, picks up car, checks in ============= */
+    {
+      id: 'arrive-nce-erica', type: 'flight', who: 'Erica',
+      date: '2026-05-21', time: '12:00',
+      tz: 'Europe/Paris', tzAbbr: 'CEST',
+      title: 'Arrive Nice (NCE)',
+      subtitle: 'Erica lands in France',
+      lat: 43.6598704, lng: 7.2142012,
+      meta: {
+        'Local time': '12:00 PM CEST',
+        Confirmation: 'GQ9Y2B',
+      },
+    },
+    {
+      id: 'sixt-pickup', type: 'car', who: 'Erica',
+      date: '2026-05-21', time: '12:00',
+      tz: 'Europe/Paris', tzAbbr: 'CEST',
+      title: 'Pick up rental car · Sixt',
+      subtitle: 'Nice Airport, Terminal 2',
+      lat: 43.6598704, lng: 7.2142012,
+      meta: {
+        Company: 'Sixt',
+        Location: 'Location de Voitures, Terminal 2, Nice Airport',
+        'Pick up': 'Thu May 21, 12:00 PM CEST',
+        'Drop off': 'Thu May 28, 12:00 PM CEST',
+        Confirmation: '9732678925',
+      },
+    },
+    {
+      id: 'hameau-checkin', type: 'hotel', who: 'Erica',
+      date: '2026-05-21', time: '15:00',
+      tz: 'Europe/Paris', tzAbbr: 'CEST',
+      title: 'Check in · Hameau des Baux',
+      subtitle: 'Paradou, Provence',
+      stay: 'hameau',
+      lat: 43.7269011, lng: 4.7882359,
+      meta: {
+        Address: '285 Chem. de Bourgeac, 13520 Paradou, France',
+        'Check in': '3:00 PM CEST · Thu May 21',
+        'Check out': '11:00 AM CEST · Mon May 25',
+        Nights: '4',
+        Phone: '+33 4 48 70 00 23',
+        Confirmation: '416435546',
+        Notes: 'Restaurant requires booking 3–4 weeks ahead per recent reviews. Book dinner on arrival.',
+      },
+    },
+
+    /* ============= Fri May 22 — Joel flies, Erica is solo in Provence ============= */
+    {
+      id: 'dl1693-out', type: 'flight', who: 'Joel',
+      date: '2026-05-22', time: '17:14', endDate: '2026-05-22', endTime: '19:28',
+      tz: 'America/Chicago', tzAbbr: 'CDT',
+      title: 'BNA → ATL · DL 1693',
+      subtitle: 'Joel departs Nashville',
+      lat: 36.1245, lng: -86.6782,
+      meta: {
+        Flight: 'Delta 1693',
+        Route: 'Nashville (BNA) → Atlanta (ATL)',
+        Departs: '5:14 PM CDT',
+        Arrives: '7:28 PM EDT',
+        Duration: '1h 14m',
+        Aircraft: 'Boeing 737-900',
+        Seat: '18C',
+        Confirmation: 'GRNY7X',
+        Passenger: 'Joel Beukelman',
+      },
+    },
+    {
+      id: 'dl24-out-joel', type: 'flight', who: 'Joel',
+      date: '2026-05-22', time: '20:50', endDate: '2026-05-23', endTime: '12:00',
+      endTz: 'Europe/Paris',
+      tz: 'America/New_York', tzAbbr: 'EDT',
+      title: 'ATL → NCE · DL 24',
+      subtitle: 'Joel transatlantic to Nice',
+      lat: 33.6407, lng: -84.4277,
+      meta: {
+        Flight: 'Delta 24',
+        Route: 'Atlanta (ATL) → Nice (NCE)',
+        Departs: '8:50 PM EDT',
+        Arrives: '12:00 PM CEST (Sat May 23)',
+        Duration: '9h 10m',
+        Aircraft: 'Boeing 767-400',
+        Seat: '30B',
+        Confirmation: 'GRNY7X',
+        Passenger: 'Joel Beukelman',
+      },
+    },
+
+    /* ============= Sat May 23 — Joel lands, joins Erica ============= */
+    {
+      id: 'arrive-nce-joel', type: 'flight', who: 'Joel',
+      date: '2026-05-23', time: '12:00',
+      tz: 'Europe/Paris', tzAbbr: 'CEST',
+      title: 'Joel arrives Nice (NCE)',
+      subtitle: 'Drive to Paradou to meet Erica',
+      lat: 43.6598704, lng: 7.2142012,
+      meta: {
+        'Local time': '12:00 PM CEST',
+        'Drive to Paradou': '~2 hr 30 min · 230 km',
+        Confirmation: 'GRNY7X',
+      },
+    },
+
+    /* ============= Activity placeholders for May 23–24 (suggestions only — not booked) ============= */
+    /* These show up in the Suggestions tab. Today view will use the stay as the anchor. */
+
+    /* ============= Mon May 25 — Provence → Cassis ============= */
+    {
+      id: 'hameau-checkout', type: 'hotel', who: null,
+      date: '2026-05-25', time: '11:00',
+      tz: 'Europe/Paris', tzAbbr: 'CEST',
+      title: 'Check out · Hameau des Baux',
+      subtitle: 'Drive to Cassis',
+      stay: 'hameau',
+      lat: 43.7269011, lng: 4.7882359,
+      meta: {
+        'Check out': '11:00 AM CEST',
+        'Drive to Cassis': '~1 hr 15 min · 90 km',
+        Confirmation: '416435546',
+      },
+    },
+    {
+      id: 'liautaud-checkin', type: 'hotel', who: null,
+      date: '2026-05-25', time: '15:00',
+      tz: 'Europe/Paris', tzAbbr: 'CEST',
+      title: 'Check in · Hôtel Liautaud',
+      subtitle: 'Cassis harbor',
+      stay: 'liautaud',
+      lat: 43.2140091, lng: 5.5384713,
+      meta: {
+        Address: 'Rue Marcel Barthélémy, 13260 Cassis, France',
+        'Check in': '3:00 PM CEST · Mon May 25',
+        'Check out': '11:00 AM CEST · Wed May 27',
+        Nights: '2',
+        Phone: '+33 4 51 68 02 02',
+        Confirmation: 'KBSHPP',
+        Notes: 'Harborside; small rooms; some street noise per reviews.',
+      },
+    },
+
+    /* ============= Wed May 27 — Cassis → Saint-Raphaël ============= */
+    {
+      id: 'liautaud-checkout', type: 'hotel', who: null,
+      date: '2026-05-27', time: '11:00',
+      tz: 'Europe/Paris', tzAbbr: 'CEST',
+      title: 'Check out · Hôtel Liautaud',
+      subtitle: 'Drive to Saint-Raphaël',
+      stay: 'liautaud',
+      lat: 43.2140091, lng: 5.5384713,
+      meta: {
+        'Check out': '11:00 AM CEST',
+        'Drive to Saint-Raphaël': '~2 hr · 200 km',
+        Confirmation: 'KBSHPP',
+      },
+    },
+    {
+      id: 'rr-checkin', type: 'hotel', who: null,
+      date: '2026-05-27', time: '15:00',
+      tz: 'Europe/Paris', tzAbbr: 'CEST',
+      title: 'Check in · Les Roches Rouges',
+      subtitle: 'Côte d\'Azur',
+      stay: 'rochesRouges',
+      lat: 43.4168663, lng: 6.837302,
+      meta: {
+        Address: '90 Bd de la 36e Division du Texas, 83700 Saint-Raphaël',
+        'Check in': '3:00 PM CEST · Wed May 27',
+        'Check out': '11:00 AM CEST · Fri May 29',
+        Nights: '2',
+        Confirmation: '459067670',
+        Notes: 'Main relax day. Pool, sea swim, sunset dinner at the hotel.',
+      },
+    },
+
+    /* ============= Thu May 28 — Antibes en route to Nice ============= */
+    {
+      id: 'antibes-visit', type: 'activity', who: null,
+      date: '2026-05-28', time: '12:00', endTime: '15:00',
+      tz: 'Europe/Paris', tzAbbr: 'CEST',
+      title: 'Visit Antibes',
+      subtitle: 'Lunch stop en route to Nice',
+      lat: 43.580418, lng: 7.125102,
+      meta: {
+        Duration: '~3 hours',
+        Notes: 'PDF showed "CDT" — converted to local CEST. Tight timing: Les Roches Rouges checkout is 11 AM, Antibes is 1 hr east.',
+        Suggested: 'Old Town walk, Marché Provençal (mornings), Picasso Museum',
+      },
+    },
+    {
+      id: 'rr-checkout', type: 'hotel', who: null,
+      date: '2026-05-28', time: '11:00',
+      tz: 'Europe/Paris', tzAbbr: 'CEST',
+      title: 'Check out · Les Roches Rouges',
+      subtitle: '',
+      stay: 'rochesRouges',
+      lat: 43.4168663, lng: 6.837302,
+      meta: {
+        'Check out': '11:00 AM CEST',
+        Confirmation: '459067670',
+      },
+    },
+    {
+      id: 'sixt-dropoff', type: 'car', who: null,
+      date: '2026-05-28', time: '12:00',
+      tz: 'Europe/Paris', tzAbbr: 'CEST',
+      title: 'Return rental car · Sixt',
+      subtitle: 'Nice Airport, Terminal 2',
+      lat: 43.6598704, lng: 7.2142012,
+      meta: {
+        Company: 'Sixt',
+        Location: 'Terminal 2, Nice Airport',
+        'Drop off': '12:00 PM CEST',
+        Confirmation: '9732678925',
+        'Conflict flag': 'PDF shows car drop off 12:00 AND Antibes start 12:00. These overlap — confirm actual plan: drop car first (Antibes is en route between SR and Nice).',
+      },
+    },
+    {
+      id: 'albert-checkin', type: 'hotel', who: null,
+      date: '2026-05-28', time: '15:00',
+      tz: 'Europe/Paris', tzAbbr: 'CEST',
+      title: 'Check in · Hôtel Albert 1er',
+      subtitle: 'Nice',
+      stay: 'albert',
+      lat: 43.6958915, lng: 7.2693671,
+      meta: {
+        Address: '4 Av. Max Gallo, 06300 Nice',
+        'Check in': '3:00 PM CEST · Thu May 28',
+        'Check out': '11:00 AM CEST · Fri May 29 (1 night)',
+        Phone: '+33 4 93 85 74 01',
+        Confirmation: '73415476340256',
+      },
+    },
+
+    /* ============= Fri May 29 — Menton + Ventimiglia day trip ============= */
+    {
+      id: 'menton-day', type: 'activity', who: null,
+      date: '2026-05-29', time: '09:00', endDate: '2026-05-30', endTime: '00:00',
+      tz: 'Europe/Paris', tzAbbr: 'CEST',
+      title: 'Day Trip · Menton & Ventimiglia',
+      subtitle: 'Train from Nice',
+      lat: 43.7765, lng: 7.5046, /* Menton */
+      meta: {
+        Plan: 'Morning train to Menton → lunch & explore → continue to Ventimiglia (Italy) for market & dinner → train back to Nice',
+        'Train (Nice → Menton)': '~35 min',
+        'Train (Menton → Ventimiglia)': '~10 min',
+        Insider: 'Friday market in Ventimiglia is huge. Cap Moderne / Villa E-1027 requires advance booking at capmoderne.com.',
+      },
+    },
+    {
+      id: 'albert-checkout', type: 'hotel', who: null,
+      date: '2026-05-29', time: '11:00',
+      tz: 'Europe/Paris', tzAbbr: 'CEST',
+      title: 'Check out · Hôtel Albert 1er',
+      subtitle: 'Move to Hôtel du Couvent',
+      stay: 'albert',
+      lat: 43.6958915, lng: 7.2693671,
+      meta: {
+        Confirmation: '73415476340256',
+        Notes: 'Same-day move within Nice. Confirm bag storage with both hotels.',
+      },
+    },
+
+    /* ============= Sat May 30 — Èze morning + Couvent + Le Plongeoir ============= */
+    {
+      id: 'eze-morning', type: 'activity', who: null,
+      date: '2026-05-30', time: '08:00', endTime: '15:00',
+      tz: 'Europe/Paris', tzAbbr: 'CEST',
+      title: 'Morning Trip · Èze',
+      subtitle: 'Village + Jardin Exotique',
+      lat: 43.728302, lng: 7.3612263,
+      meta: {
+        Plan: 'Walk medieval village, Jardin Exotique at the top for panoramic views',
+        Transport: 'Bus #83 from Nice (not taxi — much easier)',
+        Insider: 'Go early to beat tour buses. Coffee at the cliffside cafés before they fill.',
+      },
+    },
+    {
+      id: 'couvent-checkin', type: 'hotel', who: null,
+      date: '2026-05-30', time: '15:00',
+      tz: 'Europe/Paris', tzAbbr: 'CEST',
+      title: 'Check in · Hôtel du Couvent',
+      subtitle: 'Vieux Nice',
+      stay: 'couvent',
+      lat: 43.6971767, lng: 7.2788356,
+      meta: {
+        Address: '1 Rue Honoré Ugo, 06300 Nice',
+        'Check in': '3:00 PM CEST · Sat May 30',
+        'Check out': '11:00 AM CEST · Mon Jun 1',
+        Phone: '+33 4 12 05 55 60',
+        Confirmation: '2432189749',
+        Notes: 'Limited vehicle access in Old Town — drop bags at hotel by taxi or walk in.',
+      },
+    },
+    {
+      id: 'plongeoir', type: 'dining', who: null,
+      date: '2026-05-30', time: '17:00',
+      tz: 'Europe/Paris', tzAbbr: 'CEST',
+      title: 'Le Plongeoir',
+      subtitle: 'Dinner over the sea',
+      lat: 43.6919027, lng: 7.290909,
+      meta: {
+        Address: '60 Bd Franck Pilatte, 06300 Nice',
+        Phone: '+33 4 93 26 53 02',
+        Website: 'https://www.leplongeoir.com/',
+        Notes: 'Iconic perched-on-rock restaurant. Reservation confirmed.',
+      },
+    },
+
+    /* ============= Mon Jun 1 — Departure ============= */
+    {
+      id: 'couvent-checkout', type: 'hotel', who: null,
+      date: '2026-06-01', time: '11:00',
+      tz: 'Europe/Paris', tzAbbr: 'CEST',
+      title: 'Check out · Hôtel du Couvent',
+      subtitle: 'Head to airport',
+      stay: 'couvent',
+      lat: 43.6971767, lng: 7.2788356,
+      meta: {
+        Confirmation: '2432189749',
+        'To NCE airport': '~25 min by taxi (no rental car)',
+      },
+    },
+    {
+      id: 'dl29', type: 'flight', who: null,
+      date: '2026-06-01', time: '14:00', endDate: '2026-06-01', endTime: '17:25',
+      endTz: 'America/New_York',
+      tz: 'Europe/Paris', tzAbbr: 'CEST',
+      title: 'NCE → JFK · DL 29',
+      subtitle: 'Erica & Joel · transatlantic home',
+      lat: 43.6598704, lng: 7.2142012,
+      meta: {
+        Flight: 'Delta 29 · Delta Comfort',
+        Route: 'Nice (NCE) → New York (JFK)',
+        Departs: '2:00 PM CEST',
+        Arrives: '5:25 PM EDT',
+        Duration: '~9h 25m',
+        Aircraft: 'Boeing 767-400',
+        'Joel seat': '30B',
+        Confirmation: 'GRNY7X (Joel) / GQ9Y2B (Erica)',
+      },
+    },
+    {
+      id: 'dl4908', type: 'flight', who: null,
+      date: '2026-06-01', time: '19:55', endDate: '2026-06-01', endTime: '21:45',
+      endTz: 'America/Chicago',
+      tz: 'America/New_York', tzAbbr: 'EDT',
+      title: 'JFK → BNA · DL 4908',
+      subtitle: 'Home to Nashville',
+      lat: 40.6413, lng: -73.7781,
+      meta: {
+        Flight: 'Delta 4908 (operated by Endeavor / Delta Connection)',
+        Route: 'New York (JFK) → Nashville (BNA)',
+        Departs: '7:55 PM EDT',
+        Arrives: '9:45 PM CDT',
+        Duration: '2h 50m',
+        Aircraft: 'Canadair Regional Jet 900 / Challenger',
+        'Joel seat': '05B',
+        Confirmation: 'GRNY7X / GQ9Y2B',
+      },
+    },
+  ],
+
+  /* Suggestions — pulled from prior planning chats; marked clearly. */
+  suggestions: [
+    /* Provence — May 21–25 */
+    {
+      leg: 'Provence', legDates: 'May 21 – 25', region: 'hameau',
+      lat: 43.6777541, lng: 4.6309241,
+      title: 'Arles Saturday Market + Roman Arena',
+      tag: 'Sat May 23',
+      why: 'Joel lands midday Sat — Arles\' market is THE big one in the region (Saturday is the headline day). Wander stalls, then climb the Roman amphitheatre nearby.',
+      details: ['~25 min from Hameau', 'Market: Bd des Lices, 8am–1pm', 'Arena open to 4pm']
+    },
+    {
+      leg: 'Provence', legDates: 'May 21 – 25', region: 'hameau',
+      lat: 43.748553799999996, lng: 4.7964139999999995,
+      title: 'Carrières des Lumières — Picasso Show',
+      tag: 'May 23–24',
+      why: 'Walking distance from your hotel. 14m walls projected with Picasso in motion right now — exactly the art + architecture combo you both like, and an easy half-day.',
+      details: ['7 min drive from Hameau', 'Open 9:30am–7pm', 'Adults €16.50', 'Last entry 1hr before close', 'Bring a layer — quarry interior stays cool']
+    },
+    {
+      leg: 'Provence', legDates: 'May 21 – 25', region: 'hameau',
+      lat: 43.742448499999995, lng: 4.7943839,
+      title: 'Château des Baux + village',
+      tag: 'May 23–24',
+      why: 'Combo-ticket option with the Carrières. Hilltop ruins, sweeping Alpilles views — a postcard half-day. Pair with lunch in the village.',
+      details: ['Open 9am–7pm', 'Combo pass available', 'Wear real shoes — steep, uneven']
+    },
+    {
+      leg: 'Provence', legDates: 'May 21 – 25', region: 'hameau',
+      lat: 43.7880842, lng: 4.829848,
+      title: 'Saint-Rémy-de-Provence (Sunday stroll)',
+      tag: 'Sun May 24',
+      why: 'Closest charming town to Hameau. Small Sunday market, Van Gogh\'s asylum at St-Paul-de-Mausole, easy lunch on the square.',
+      details: ['10 min drive', 'Wed market is the big one — Sun is smaller', 'Glanum Roman ruins nearby']
+    },
+    {
+      leg: 'Provence', legDates: 'May 21 – 25', region: 'hameau',
+      lat: 43.947565999999995, lng: 4.53496,
+      title: 'Pont du Gard',
+      tag: 'Half-day option',
+      why: '2,000-year-old Roman aqueduct, biggest in the empire — your kind of architecture stop. Free to walk across the bridge; great picnic spot by the river.',
+      details: ['45 min drive from Hameau', 'Site open daily', 'River swimming possible']
+    },
+    {
+      leg: 'Provence', legDates: 'May 21 – 25', region: 'hameau',
+      lat: 43.5413, lng: 5.3858,
+      title: 'Château La Coste',
+      tag: 'Art + wine',
+      why: 'Outdoor art walk (Bourgeois, Calder, Ai Weiwei), Tadao Ando architecture, AND wine tasting. Hits both of you — Erica won\'t get museum fatigue.',
+      details: ['~1 hr drive', 'Allow ~3 hr for art walk', 'Book wine tasting in advance']
+    },
+
+    /* Cassis */
+    {
+      leg: 'Cassis', legDates: 'May 25 – 27', region: 'liautaud',
+      lat: 43.2190753, lng: 5.5408095,
+      title: 'Calanques sea kayaking',
+      tag: 'Pick a morning',
+      why: 'The #1 on-the-water experience in southern France. Renaud at Calanc\'O has near-perfect reviews. Morning is cooler and less crowded.',
+      details: ['€48–69 per person', 'Half or full day', 'BOOK EARLY — wildfire closures possible', 'Bring water shoes']
+    },
+    {
+      leg: 'Cassis', legDates: 'May 25 – 27', region: 'liautaud',
+      lat: 43.2140091, lng: 5.5384713,
+      title: 'Harbor evening + dinner',
+      tag: 'Either night',
+      why: 'You\'re right on the port — that\'s the whole point of Cassis. Aperitif at the harbor, dinner with feet near the water.',
+      details: ['Bonaparte, La Villa Madie (Michelin, in Anse de Corton)', 'Reserve dinner ahead in May']
+    },
+
+    /* Saint-Raphaël */
+    {
+      leg: 'Saint-Raphaël', legDates: 'May 27 – 28', region: 'rochesRouges',
+      lat: 43.4168663, lng: 6.837302,
+      title: 'Full pool + sea day at Roches Rouges',
+      tag: 'May 27',
+      why: 'You called this your "main relax and enjoy the Riviera" day. Don\'t overschedule it — that\'s the point.',
+      details: ['Two pools', 'Sea swimming below', 'Sunset dinner at hotel restaurant']
+    },
+
+    /* Nice */
+    {
+      leg: 'Nice', legDates: 'May 28 – Jun 1', region: 'couvent',
+      lat: 43.6959352, lng: 7.279660100000001,
+      title: 'Castle Hill (Colline du Château) at sunset',
+      tag: 'Any evening',
+      why: 'Best panoramic view in Nice — old town one side, harbor the other. Free elevator if you go before about 8 pm.',
+      details: ['Park open ~8:30am–8pm', 'Free entry', 'Waterfall + ruins at top']
+    },
+    {
+      leg: 'Nice', legDates: 'May 28 – Jun 1', region: 'couvent',
+      lat: 43.6961, lng: 7.2756,
+      title: 'Cours Saleya market + Vieux Nice walk',
+      tag: 'Mornings',
+      why: 'Daily flower + produce market right next to Hôtel du Couvent. Best socca (chickpea flatbread) at Chez Pipo nearby.',
+      details: ['Tue–Sun mornings', 'Antiques on Mondays', 'Closed mid-afternoon']
+    },
+    {
+      leg: 'Nice', legDates: 'May 28 – Jun 1', region: 'couvent',
+      lat: 43.7891, lng: 6.2419, /* Gorges du Verdon — Lac de Sainte-Croix area */
+      title: 'Gorges du Verdon (if you want a long day)',
+      tag: 'Day trip option',
+      why: 'Europe\'s answer to the Grand Canyon — kayaks on turquoise water under 700m cliffs. Long drive from Nice (3+ hrs each way) so only if you have the appetite.',
+      details: ['3+ hr drive each way', 'Rent pedal boats / kayaks at Pont du Galetas', 'Stop in Moustiers-Sainte-Marie on return']
+    },
+  ],
+};
+
+/* =============================================================
+   HELPERS
+   ============================================================= */
+const $ = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+/* Date helpers — work in the trip's local timezone (Europe/Paris when in France) */
+function parseDateAt(dateStr, timeStr) {
+  /* dateStr 'YYYY-MM-DD', timeStr 'HH:MM' (both treated as wall time of the event's tz) */
+  if (!dateStr) return null;
+  const [y, m, d] = dateStr.split('-').map(Number);
+  if (timeStr) {
+    const [hh, mm] = timeStr.split(':').map(Number);
+    return new Date(y, m - 1, d, hh, mm);
+  }
+  return new Date(y, m - 1, d);
+}
+
+function fmtTime12(t) {
+  if (!t) return '';
+  const [hh, mm] = t.split(':').map(Number);
+  const period = hh >= 12 ? 'PM' : 'AM';
+  const h12 = ((hh + 11) % 12) + 1;
+  return `${h12}:${String(mm).padStart(2, '0')} ${period}`;
+}
+
+function fmtLongDate(dateStr) {
+  if (!dateStr) return '';
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const dt = new Date(y, m - 1, d);
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  return `${days[dt.getDay()]}, ${months[dt.getMonth()]} ${dt.getDate()}`;
+}
+function fmtShortDate(dateStr) {
+  if (!dateStr) return '';
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const dt = new Date(y, m - 1, d);
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${days[dt.getDay()]} · ${months[dt.getMonth()]} ${dt.getDate()}`;
+}
+
+/* Today detection — supports manual override via ?day=YYYY-MM-DD for testing */
+function getEffectiveToday() {
+  const p = new URLSearchParams(location.search);
+  if (p.get('day')) return p.get('day');
+  const now = new Date();
+  /* Use local date as the user is presumed to be reading at the trip's local time */
+  const y = now.getFullYear();
+  const m = String(now.getMonth() + 1).padStart(2, '0');
+  const d = String(now.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
+/* Group events by date */
+function eventsByDate() {
+  const groups = {};
+  TRIP.events.forEach(e => {
+    if (!groups[e.date]) groups[e.date] = [];
+    groups[e.date].push(e);
+  });
+  Object.values(groups).forEach(arr => arr.sort((a, b) => (a.time || '').localeCompare(b.time || '')));
+  return groups;
+}
+
+/* Get all trip date strings (between trip start and end inclusive) */
+function allTripDates() {
+  const out = [];
+  const [sy, sm, sd] = TRIP.meta.start.split('-').map(Number);
+  const [ey, em, ed] = TRIP.meta.end.split('-').map(Number);
+  let cur = new Date(sy, sm - 1, sd);
+  const end = new Date(ey, em - 1, ed);
+  while (cur <= end) {
+    const y = cur.getFullYear();
+    const m = String(cur.getMonth() + 1).padStart(2, '0');
+    const d = String(cur.getDate()).padStart(2, '0');
+    out.push(`${y}-${m}-${d}`);
+    cur.setDate(cur.getDate() + 1);
+  }
+  return out;
+}
+
+/* Where are they "based" on a given date? Returns stay key. */
+function stayOnDate(dateStr) {
+  /* Walk events; the most recent check-in before/on this date that hasn't been checked out wins. */
+  let current = null;
+  const sortedEvents = [...TRIP.events].sort((a, b) =>
+    (a.date + (a.time || '')).localeCompare(b.date + (b.time || ''))
+  );
+  for (const e of sortedEvents) {
+    if (e.date > dateStr) break;
+    if (e.type === 'hotel' && e.title.startsWith('Check in')) {
+      current = e.stay;
+    }
+    if (e.type === 'hotel' && e.title.startsWith('Check out') && e.date < dateStr) {
+      if (current === e.stay) current = null;
+    }
+  }
+  return current;
+}
+
+/* =============================================================
+   ICONS
+   ============================================================= */
+const ICON = {
+  flight: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2L16 11l3.5-3.5c.83-.83.83-2.17 0-3-.83-.83-2.17-.83-3 0L13 8 4.8 6.2c-.5-.1-.9.4-.6.8l4 5.1-2.2 2.2-2-1L3 14.5l3 1.5 1.5 3 1.2-1 -1-2 2.2-2.2 5.1 4c.4.3.9-.1.8-.6z"/></svg>',
+  hotel: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20V7a2 2 0 012-2h14a2 2 0 012 2v13M3 20h18M3 13h18M8 9h2M14 9h2M8 17h2M14 17h2"/></svg>',
+  car: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M5 17l-2-5 2-5h14l2 5-2 5M5 17v2a1 1 0 001 1h2a1 1 0 001-1v-2M15 17v2a1 1 0 001 1h2a1 1 0 001-1v-2M7 12h10"/></svg>',
+  activity: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L9 9l-7 1 5 5-1 7 6-3 6 3-1-7 5-5-7-1z"/></svg>',
+  dining: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h2v11M7 11h0M19 2v20M19 2c-1.5 0-3 2-3 5s1.5 5 3 5"/></svg>',
+  phone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z"/></svg>',
+  map: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+  chevron: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>',
+  ext: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>',
+};
+
+/* =============================================================
+   MAPS DEEP LINK
+   ============================================================= */
+function isiOS() {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+}
+function mapsLinkFor(lat, lng, label) {
+  /* Use universal Google Maps link — opens in Apple Maps too on iOS if Google not installed */
+  const q = encodeURIComponent(label || `${lat},${lng}`);
+  /* Apple Maps falls back gracefully; Google Maps takes precedence on Android */
+  return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}&query_place_id=${q}`;
+}
+function mapsDirLink(lat, lng, label) {
+  const dest = encodeURIComponent(`${lat},${lng}`);
+  return `https://www.google.com/maps/dir/?api=1&destination=${dest}`;
+}
+
+/* =============================================================
+   PAGE RENDERERS
+   ============================================================= */
+
+/* ----- TODAY ----- */
+function renderToday() {
+  const root = $('#page-today');
+  const today = getEffectiveToday();
+  const groups = eventsByDate();
+  const tripStart = TRIP.meta.start;
+  const tripEnd = TRIP.meta.end;
+
+  let html = '';
+
+  /* Pre-trip */
+  if (today < tripStart) {
+    const daysOut = Math.ceil((parseDateAt(tripStart) - parseDateAt(today)) / 86400000);
+    html += `
+      <div class="today-hero">
+        <div class="today-date">Counting down</div>
+        <h1 class="today-headline">${daysOut} ${daysOut === 1 ? 'day' : 'days'} until <em>Provence</em></h1>
+        <p class="today-sub">Trip starts ${fmtLongDate(tripStart)}. Tap "Trip" for the full itinerary.</p>
+      </div>
+      <div class="rule-ornate"><span class="rule-ornate-mark">✦</span></div>
+      <p class="today-sub">${renderFirstEventTeaser()}</p>
+    `;
+    root.innerHTML = html;
+    return;
+  }
+
+  /* Post-trip */
+  if (today > tripEnd) {
+    html += `
+      <div class="today-hero">
+        <div class="today-date">Bon retour</div>
+        <h1 class="today-headline"><em>Welcome home.</em></h1>
+        <p class="today-sub">Your trip wrapped up ${fmtLongDate(tripEnd)}. Full itinerary is still available under "Trip" anytime.</p>
+      </div>
+    `;
+    root.innerHTML = html;
+    return;
+  }
+
+  /* During trip */
+  const todays = groups[today] || [];
+  const stay = stayOnDate(today);
+  const stayInfo = stay ? TRIP.stays[stay] : null;
+
+  /* Determine earlier/now/next/later based on current wall time.
+     IMPORTANT: we never hide past events — travellers want full visibility
+     of the day. Past items get a softer "Earlier today" band. */
+  const nowDate = new Date();
+  const nowMin = nowDate.getHours() * 60 + nowDate.getMinutes();
+  let nowEv = null, nextEv = null;
+  const earlierEv = [];
+  const laterEv = [];
+
+  todays.forEach(ev => {
+    const [h, m] = (ev.time || '00:00').split(':').map(Number);
+    const evMin = h * 60 + m;
+    let endMin = evMin + 90; /* default 90 min duration */
+    if (ev.endTime && (!ev.endDate || ev.endDate === ev.date)) {
+      const [eh, em] = ev.endTime.split(':').map(Number);
+      endMin = eh * 60 + em;
+    }
+    if (nowMin >= evMin && nowMin <= endMin && !nowEv) {
+      nowEv = ev;
+    } else if (evMin > nowMin && !nextEv) {
+      nextEv = ev;
+    } else if (evMin > nowMin) {
+      laterEv.push(ev);
+    } else {
+      earlierEv.push(ev);
+    }
+  });
+
+  /* Headline */
+  const dayIndex = allTripDates().indexOf(today) + 1;
+  const totalDays = allTripDates().length;
+  html += `
+    <div class="today-hero">
+      <div class="today-date">${fmtLongDate(today)} · Day ${dayIndex} of ${totalDays}</div>
+      <h1 class="today-headline">${getTodayHeadline(stayInfo, todays)}</h1>
+      ${stayInfo ? `<p class="today-sub">Based at <strong>${stayInfo.shortName}</strong> · ${stayInfo.region}</p>` : ''}
+    </div>
+  `;
+
+  /* Earlier today (collapsed by default but visible) */
+  if (earlierEv.length) {
+    html += `<div class="event-band"><span class="event-band-label">Earlier today</span><span class="event-band-line"></span></div>`;
+    earlierEv.forEach(ev => html += eventCardHTML(ev, false, true));
+  }
+
+  /* Now */
+  if (nowEv) {
+    html += `<div class="event-band"><span class="event-band-label now">● Now</span><span class="event-band-line"></span></div>`;
+    html += eventCardHTML(nowEv, true);
+  }
+
+  /* Up next */
+  if (nextEv) {
+    html += `<div class="event-band"><span class="event-band-label">Up next</span><span class="event-band-line"></span></div>`;
+    html += eventCardHTML(nextEv, false);
+  }
+
+  /* Later today */
+  if (laterEv.length) {
+    html += `<div class="event-band"><span class="event-band-label">Later today</span><span class="event-band-line"></span></div>`;
+    laterEv.forEach(ev => html += eventCardHTML(ev, false));
+  }
+
+  /* Empty day — only when literally no events on this date */
+  if (todays.length === 0) {
+    html += `
+      <div class="event-band"><span class="event-band-label">Free day</span><span class="event-band-line"></span></div>
+      <div class="card card-pad">
+        <p style="margin:0 0 8px 0; font-family: var(--serif); font-size: 18px; font-style: italic;">No fixed plans today.</p>
+        <p style="margin:0; color: var(--ink-2); font-size: 14px;">Check the <strong>Ideas</strong> tab for suggestions near ${stayInfo ? stayInfo.shortName : 'your stay'}.</p>
+      </div>
+    `;
+  }
+
+  /* Tomorrow preview */
+  const tomorrow = nextDay(today);
+  if (tomorrow && tomorrow <= tripEnd && groups[tomorrow] && groups[tomorrow].length) {
+    const firstTom = groups[tomorrow][0];
+    html += `
+      <div class="event-band"><span class="event-band-label">Tomorrow</span><span class="event-band-line"></span></div>
+      <div class="card card-pad" style="cursor:pointer" onclick="document.querySelector('[data-tab=itinerary]').click()">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 4px">${fmtShortDate(tomorrow)} · first up</div>
+        <div style="font-family: var(--serif); font-size: 17px; font-weight: 500; letter-spacing: -0.005em;">${firstTom.title}</div>
+        <div style="font-size: 13px; color: var(--ink-2); margin-top: 2px">${fmtTime12(firstTom.time)} ${firstTom.tzAbbr || ''} · ${firstTom.subtitle || ''}</div>
+      </div>
+    `;
+  }
+
+  html += `<div class="footer-note">${TRIP.meta.travelers.join(' · ')}</div>`;
+  root.innerHTML = html;
+  wireEventCardButtons(root);
+}
+
+function getTodayHeadline(stayInfo, todays) {
+  if (!todays || !todays.length) {
+    if (stayInfo) return `A quiet day in <em>${stayInfo.region.split('—')[0].trim()}</em>.`;
+    return `A free day.`;
+  }
+  /* If a flight or transfer is in the day, headline that */
+  const flight = todays.find(e => e.type === 'flight');
+  if (flight) {
+    if (flight.title.includes('Arrive')) return `<em>Arrival day.</em>`;
+    if (flight.title.includes('→ JFK') || flight.title.includes('→ BNA')) return `<em>Heading home.</em>`;
+    return `<em>Travel day.</em>`;
+  }
+  const checkin = todays.find(e => e.type === 'hotel' && e.title.startsWith('Check in'));
+  if (checkin) {
+    const stay = TRIP.stays[checkin.stay];
+    return `Today: <em>${stay.region.split('—')[0].trim()}</em>`;
+  }
+  if (stayInfo) return `Another day in <em>${stayInfo.region.split('—')[0].trim()}</em>.`;
+  return todays[0].title;
+}
+
+function renderFirstEventTeaser() {
+  const first = TRIP.events[0];
+  return `First up: <strong>${first.title}</strong> — ${fmtShortDate(first.date)}, ${fmtTime12(first.time)} ${first.tzAbbr}.`;
+}
+
+function nextDay(dateStr) {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const dt = new Date(y, m - 1, d + 1);
+  return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
+}
+
+function eventCardHTML(ev, isNow, isDimmed) {
+  const typeIcon = ICON[ev.type] || ICON.activity;
+  const stayPhone = ev.stay && TRIP.stays[ev.stay] ? TRIP.stays[ev.stay].phone : null;
+  const phone = ev.meta?.Phone || stayPhone;
+  const conf = ev.meta?.Confirmation;
+  const addr = ev.meta?.Address || (ev.stay && TRIP.stays[ev.stay] ? TRIP.stays[ev.stay].address : null);
+  const flagged = ev.meta?.['Conflict flag'];
+
+  return `
+    <article class="event ${isNow ? 'now' : ''} ${isDimmed ? 'dim' : ''}">
+      <div class="event-header">
+        <span class="event-time">${fmtTime12(ev.time)}${ev.endTime && (!ev.endDate || ev.endDate === ev.date) ? ` – ${fmtTime12(ev.endTime)}` : ''}<span class="tz">${ev.tzAbbr || ''}</span></span>
+        <span class="event-type ${ev.type}">${ev.type}</span>
+      </div>
+      <h3 class="event-title">${ev.title}</h3>
+      ${ev.subtitle ? `<p class="event-sub">${ev.subtitle}</p>` : ''}
+      ${addr ? `<p class="event-sub" style="margin-top:6px"><span style="color:var(--ink-3)">${addr}</span></p>` : ''}
+      <div class="event-meta">
+        ${ev.who ? `<span class="chip">${ev.who}</span>` : ''}
+        ${conf ? `<span class="chip" title="Confirmation">#${conf}</span>` : ''}
+        ${flagged ? `<span class="chip flag" title="${flagged}">⚠ check timing</span>` : ''}
+      </div>
+      <div class="action-row">
+        ${ev.lat && ev.lng ? `<a class="btn-action primary" href="${mapsLinkFor(ev.lat, ev.lng, ev.title)}" target="_blank" rel="noopener">${ICON.map}<span>Open in Maps</span></a>` : ''}
+        ${phone ? `<a class="btn-action call" href="tel:${phone.replace(/\s+/g, '')}">${ICON.phone}<span>Call</span></a>` : ''}
+        ${conf ? `<button class="btn-action" data-copy="${conf}">Copy conf. #</button>` : ''}
+      </div>
+    </article>
+  `;
+}
+
+/* ----- ITINERARY ----- */
+function renderItinerary() {
+  const root = $('#page-itinerary');
+  const today = getEffectiveToday();
+  const groups = eventsByDate();
+  const tripDates = allTripDates();
+
+  let html = `
+    <div style="margin-bottom:8px">
+      <span class="h-eyebrow">Full itinerary</span>
+      <h1 class="h-display">14 days, <em>4 stops</em>.</h1>
+      <p style="color:var(--ink-2); font-size:14.5px; margin:0 0 16px">Tap any day to expand. Today's day is highlighted.</p>
+    </div>
+  `;
+
+  tripDates.forEach((date, idx) => {
+    const events = groups[date] || [];
+    const stay = stayOnDate(date);
+    const stayInfo = stay ? TRIP.stays[stay] : null;
+    const isToday = date === today;
+    const isOpenByDefault = isToday;
+
+    html += `
+      <div class="day-group">
+        <button class="day-header ${isToday ? 'today' : ''}" aria-expanded="${isOpenByDefault}" data-day="${date}">
+          <div>
+            <div class="day-num">Day ${idx + 1}${isToday ? ' · Today' : ''}</div>
+            <div class="day-date">${fmtLongDate(date)}</div>
+            ${stayInfo ? `<div style="font-size:12px;color:var(--ink-3);margin-top:2px">${stayInfo.region}</div>` : '<div style="font-size:12px;color:var(--ink-3);margin-top:2px">—</div>'}
+          </div>
+          <div class="day-count">
+            ${events.length ? `${events.length} ${events.length === 1 ? 'item' : 'items'}` : 'free'}
+            ${ICON.chevron}
+          </div>
+        </button>
+        <div class="day-body ${isOpenByDefault ? 'open' : ''}" id="day-${date}">
+          ${events.length ? events.map(ev => stopHTML(ev)).join('') : `<div style="padding:16px 6px;color:var(--ink-3);font-style:italic;font-family:var(--serif)">No scheduled items — see <strong>Ideas</strong>.</div>`}
+        </div>
+      </div>
+    `;
+  });
+
+  root.innerHTML = html;
+
+  /* Wire collapse */
+  $$('.day-header', root).forEach(btn => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', !expanded);
+      const body = $(`#day-${btn.dataset.day}`);
+      if (body) body.classList.toggle('open', !expanded);
+    });
+  });
+  wireEventCardButtons(root);
+}
+
+function stopHTML(ev) {
+  const stayPhone = ev.stay && TRIP.stays[ev.stay] ? TRIP.stays[ev.stay].phone : null;
+  const phone = ev.meta?.Phone || stayPhone;
+  const conf = ev.meta?.Confirmation;
+  const stayInfo = ev.stay ? TRIP.stays[ev.stay] : null;
+  const addr = ev.meta?.Address || (stayInfo && stayInfo.address);
+  const flagged = ev.meta?.['Conflict flag'];
+
+  const metaEntries = ev.meta ? Object.entries(ev.meta).filter(([k]) => k !== 'Conflict flag') : [];
+
+  return `
+    <div class="stop">
+      <div class="stop-row1">
+        <div class="stop-time">
+          ${fmtTime12(ev.time)}
+          ${ev.endTime && (!ev.endDate || ev.endDate === ev.date) ? `<br><span style="font-weight:400;color:var(--ink-3)">${fmtTime12(ev.endTime)}</span>` : ''}
+          <span class="tz">${ev.tzAbbr || ''}</span>
+        </div>
+        <div class="stop-main">
+          <div class="stop-type">${ev.type}${ev.who ? ` · ${ev.who}` : ''}</div>
+          <div class="stop-title">${ev.title}</div>
+          ${ev.subtitle ? `<div class="stop-sub">${ev.subtitle}</div>` : ''}
+          ${flagged ? `<div class="stop-sub" style="margin-top:6px"><span class="chip flag">⚠ ${flagged}</span></div>` : ''}
+          ${metaEntries.length ? `
+            <dl class="detail-list">
+              ${metaEntries.map(([k, v]) => `
+                <dt>${k}</dt>
+                <dd${k === 'Confirmation' ? ' class="mono"' : ''}>${v == null ? '—' : escapeHTML(String(v))}</dd>
+              `).join('')}
+            </dl>
+          ` : ''}
+          <div class="action-row" style="margin-top:10px;padding-top:10px">
+            ${ev.lat && ev.lng ? `<a class="btn-action primary" href="${mapsLinkFor(ev.lat, ev.lng, ev.title)}" target="_blank" rel="noopener">${ICON.map}<span>Maps</span></a>` : ''}
+            ${phone ? `<a class="btn-action call" href="tel:${phone.replace(/\s+/g, '')}">${ICON.phone}<span>Call</span></a>` : ''}
+            ${conf ? `<button class="btn-action" data-copy="${conf}">Copy #</button>` : ''}
+            ${stayInfo?.website ? `<a class="btn-action" href="${stayInfo.website}" target="_blank" rel="noopener">${ICON.ext}<span>Site</span></a>` : ''}
+            ${ev.meta?.Website ? `<a class="btn-action" href="${ev.meta.Website}" target="_blank" rel="noopener">${ICON.ext}<span>Site</span></a>` : ''}
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function escapeHTML(s) {
+  return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+/* ----- MAP ----- */
+function renderMap() {
+  const root = $('#page-map');
+
+  /* Build pin list — one per unique stay + airports for context */
+  const pins = [
+    { num: '✈', label: 'Nice Airport (NCE)', sub: 'Arrival + departure', lat: 43.6598704, lng: 7.2142012, kind: 'airport' },
+    { num: 1, label: 'Hameau des Baux', sub: 'Provence — May 21–25', lat: 43.7269011, lng: 4.7882359, stay: 'hameau' },
+    { num: 2, label: 'Hôtel Liautaud', sub: 'Cassis — May 25–27', lat: 43.2140091, lng: 5.5384713, stay: 'liautaud' },
+    { num: 3, label: 'Les Roches Rouges', sub: 'Saint-Raphaël — May 27–28', lat: 43.4168663, lng: 6.837302, stay: 'rochesRouges' },
+    { num: 4, label: 'Hôtel Albert 1er', sub: 'Nice — May 28–29', lat: 43.6958915, lng: 7.2693671, stay: 'albert' },
+    { num: 5, label: 'Hôtel du Couvent', sub: 'Nice — May 30–Jun 1', lat: 43.6971767, lng: 7.2788356, stay: 'couvent' },
+  ];
+
+  /* Bounding box across all pins, with generous padding so nothing clips. */
+  const lats = pins.map(p => p.lat), lngs = pins.map(p => p.lng);
+  const minLat = Math.min(...lats), maxLat = Math.max(...lats);
+  const minLng = Math.min(...lngs), maxLng = Math.max(...lngs);
+  const padLat = Math.max((maxLat - minLat) * 0.30, 0.15);
+  const padLng = Math.max((maxLng - minLng) * 0.10, 0.15);
+  const vbMinLat = minLat - padLat, vbMaxLat = maxLat + padLat;
+  const vbMinLng = minLng - padLng, vbMaxLng = maxLng + padLng;
+
+  /* SVG dimensions chosen to match aspect ratio of the data so nothing distorts. */
+  const dataAspect = (vbMaxLng - vbMinLng) / (vbMaxLat - vbMinLat);
+  /* Cap aspect ratio for mobile: keep map roughly 1.6:1 max. */
+  const W = 600;
+  const H = Math.min(420, Math.max(240, W / Math.max(dataAspect * 1.4, 1.3)));
+  function project(lat, lng) {
+    const x = ((lng - vbMinLng) / (vbMaxLng - vbMinLng)) * W;
+    const y = H - ((lat - vbMinLat) / (vbMaxLat - vbMinLat)) * H;
+    return { x, y };
+  }
+
+  /* Route line through stays in order (skip airport for cleanliness) */
+  const routePts = pins.filter(p => p.stay).map(p => project(p.lat, p.lng));
+  const routePath = routePts.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
+
+  let svg = `<svg class="map-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">`;
+  /* Soft "Mediterranean" suggestion at bottom */
+  svg += `<defs>
+    <linearGradient id="sea" x1="0" y1="0.5" x2="0" y2="1">
+      <stop offset="0" stop-color="#7a9bb5" stop-opacity="0"/>
+      <stop offset="1" stop-color="#3d6586" stop-opacity="0.35"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="0.5"/>
+    </pattern>
+  </defs>`;
+  svg += `<rect width="${W}" height="${H}" fill="url(#grid)"/>`;
+  /* Approximate coastline curve (very stylized) */
+  svg += `<path d="M 0 ${H * 0.78} Q ${W * 0.3} ${H * 0.82} ${W * 0.55} ${H * 0.85} T ${W} ${H * 0.78} L ${W} ${H} L 0 ${H} Z" fill="url(#sea)"/>`;
+  /* Route */
+  svg += `<path class="map-route" d="${routePath}"/>`;
+  /* Pins with labels below */
+  pins.forEach((p, i) => {
+    const { x, y } = project(p.lat, p.lng);
+    const isAirport = p.kind === 'airport';
+    const labelY = y + 28;
+    /* Position label above pin if it would be cut off at the bottom */
+    const useTopLabel = labelY > H - 8;
+    const finalLabelY = useTopLabel ? y - 22 : labelY;
+    svg += `
+      <g class="map-pin ${isAirport ? 'airport' : ''}" data-pin="${i}">
+        <circle class="map-pin-circle" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${isAirport ? 11 : 13}"/>
+        ${isAirport
+          ? `<text class="map-pin-icon" x="${x.toFixed(1)}" y="${(y + 0.5).toFixed(1)}" text-anchor="middle" dominant-baseline="central" font-family="-apple-system,sans-serif" font-size="12">✈</text>`
+          : `<text class="map-pin-num" x="${x.toFixed(1)}" y="${y.toFixed(1)}">${p.num}</text>`
+        }
+        <text class="map-pin-label" x="${x.toFixed(1)}" y="${finalLabelY.toFixed(1)}" text-anchor="middle" dominant-baseline="central">${p.shortLabel || p.label.replace(/^Hôtel /, '').replace(/ \(NCE\)$/, '')}</text>
+      </g>
+    `;
+  });
+  svg += `</svg>`;
+
+  let html = `
+    <div style="margin-bottom:8px">
+      <span class="h-eyebrow">Overview</span>
+      <h1 class="h-display">Five <em>stops</em>, one coast.</h1>
+    </div>
+    <div class="map-wrap">${svg}</div>
+    <div class="map-list">
+      ${pins.map(p => `
+        <a class="map-list-item" href="${mapsLinkFor(p.lat, p.lng, p.label)}" target="_blank" rel="noopener">
+          <div class="map-list-num">${p.num}</div>
+          <div class="map-list-main">
+            <div class="map-list-title">${p.label}</div>
+            <div class="map-list-sub">${p.sub}</div>
+          </div>
+          <div style="color:var(--ink-3);align-self:center">${ICON.ext}</div>
+        </a>
+      `).join('')}
+    </div>
+    <p style="font-size:12px;color:var(--ink-3);margin-top:14px;font-style:italic;font-family:var(--serif);text-align:center">Coordinates from your shared Google Maps link.</p>
+  `;
+  root.innerHTML = html;
+}
+
+/* ----- SUGGESTIONS ----- */
+function renderSuggest() {
+  const root = $('#page-suggest');
+  /* Group by leg */
+  const byLeg = {};
+  TRIP.suggestions.forEach(s => {
+    if (!byLeg[s.leg]) byLeg[s.leg] = { items: [], dates: s.legDates };
+    byLeg[s.leg].items.push(s);
+  });
+
+  let html = `
+    <div style="margin-bottom:8px">
+      <span class="h-eyebrow">Ideas, not plans</span>
+      <h1 class="h-display"><em>Recommendations</em></h1>
+      <p class="sug-intro">These are <strong>suggestions only</strong> — pulled from your planning conversations with me earlier. Each pick explains why it was picked. Tap any to open in Maps.</p>
+    </div>
+  `;
+
+  Object.entries(byLeg).forEach(([leg, group]) => {
+    html += `
+      <div class="sug-leg">
+        <div class="sug-leg-head">
+          <div class="sug-leg-title">${leg}</div>
+          <div class="sug-leg-dates">${group.dates}</div>
+        </div>
+        ${group.items.map(s => `
+          <div class="sug">
+            <span class="sug-tag">Suggestion · ${s.tag}</span>
+            <h3 class="sug-title">${s.title}</h3>
+            <p class="sug-why">${s.why}</p>
+            <div class="sug-meta">${s.details.map(d => `<span class="chip">${d}</span>`).join('')}</div>
+            <div class="action-row" style="margin-top:6px;padding-top:8px">
+              <a class="btn-action primary" href="${mapsLinkFor(s.lat, s.lng, s.title)}" target="_blank" rel="noopener">${ICON.map}<span>Open in Maps</span></a>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  });
+
+  root.innerHTML = html;
+}
+
+/* ----- SEARCH ----- */
+function renderSearch() {
+  const root = $('#page-search');
+  root.innerHTML = `
+    <div style="margin-bottom:8px">
+      <span class="h-eyebrow">Find anything</span>
+      <h1 class="h-display">What are you <em>looking for</em>?</h1>
+    </div>
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input class="search-input" id="searchInput" type="search" placeholder="Hotel, city, conf #, restaurant…" autocomplete="off" />
+      <button class="search-clear" id="searchClear" aria-label="Clear search">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+    <p style="font-size:12px;color:var(--ink-3);margin-top:14px;font-style:italic;font-family:var(--serif);text-align:center">Try "Cassis", "GQ9Y2B", "Plongeoir", "Albert"…</p>
+  `;
+
+  const input = $('#searchInput');
+  const clear = $('#searchClear');
+  const out = $('#searchResults');
+
+  function doSearch(q) {
+    q = q.trim().toLowerCase();
+    clear.classList.toggle('show', q.length > 0);
+    if (!q) { out.innerHTML = ''; return; }
+
+    /* Combine events, stays, and suggestions into a searchable corpus */
+    const corpus = [];
+    TRIP.events.forEach(e => {
+      const fields = [e.title, e.subtitle, e.date, e.who, JSON.stringify(e.meta || {})].filter(Boolean).join(' ').toLowerCase();
+      if (fields.includes(q)) corpus.push({ kind: 'event', data: e });
+    });
+    Object.values(TRIP.stays).forEach(s => {
+      const fields = [s.name, s.region, s.address, s.conf, s.phone].filter(Boolean).join(' ').toLowerCase();
+      if (fields.includes(q)) corpus.push({ kind: 'stay', data: s });
+    });
+    TRIP.suggestions.forEach(s => {
+      const fields = [s.title, s.why, s.leg, s.tag].filter(Boolean).join(' ').toLowerCase();
+      if (fields.includes(q)) corpus.push({ kind: 'suggestion', data: s });
+    });
+
+    if (!corpus.length) {
+      out.innerHTML = `<div class="empty"><div class="empty-emoji">🔎</div>No matches for "${escapeHTML(q)}".</div>`;
+      return;
+    }
+
+    out.innerHTML = corpus.map(item => {
+      if (item.kind === 'event') {
+        const e = item.data;
+        return `
+          <article class="event">
+            <div class="event-header">
+              <span class="event-time">${hl(fmtShortDate(e.date), q)} · ${fmtTime12(e.time)}<span class="tz">${e.tzAbbr || ''}</span></span>
+              <span class="event-type ${e.type}">${e.type}</span>
+            </div>
+            <h3 class="event-title">${hl(e.title, q)}</h3>
+            ${e.subtitle ? `<p class="event-sub">${hl(e.subtitle, q)}</p>` : ''}
+            <div class="action-row">
+              ${e.lat && e.lng ? `<a class="btn-action primary" href="${mapsLinkFor(e.lat, e.lng, e.title)}" target="_blank" rel="noopener">${ICON.map}<span>Maps</span></a>` : ''}
+              ${e.meta?.Confirmation ? `<button class="btn-action" data-copy="${e.meta.Confirmation}">Copy ${hl(e.meta.Confirmation, q)}</button>` : ''}
+            </div>
+          </article>
+        `;
+      }
+      if (item.kind === 'stay') {
+        const s = item.data;
+        return `
+          <article class="event">
+            <div class="event-header">
+              <span class="event-time">Hotel</span>
+              <span class="event-type hotel">stay</span>
+            </div>
+            <h3 class="event-title">${hl(s.name, q)}</h3>
+            <p class="event-sub">${hl(s.address, q)}</p>
+            <div class="event-meta">
+              ${s.conf ? `<span class="chip">${hl('#' + s.conf, q)}</span>` : ''}
+            </div>
+            <div class="action-row">
+              <a class="btn-action primary" href="${mapsLinkFor(s.lat, s.lng, s.name)}" target="_blank" rel="noopener">${ICON.map}<span>Maps</span></a>
+              ${s.phone ? `<a class="btn-action call" href="tel:${s.phone.replace(/\s+/g, '')}">${ICON.phone}<span>Call</span></a>` : ''}
+              ${s.conf ? `<button class="btn-action" data-copy="${s.conf}">Copy #</button>` : ''}
+            </div>
+          </article>
+        `;
+      }
+      const s = item.data;
+      return `
+        <article class="event">
+          <div class="event-header">
+            <span class="event-time">Suggestion · ${s.leg}</span>
+            <span class="event-type activity">idea</span>
+          </div>
+          <h3 class="event-title">${hl(s.title, q)}</h3>
+          <p class="event-sub">${hl(s.why, q)}</p>
+          <div class="action-row">
+            <a class="btn-action primary" href="${mapsLinkFor(s.lat, s.lng, s.title)}" target="_blank" rel="noopener">${ICON.map}<span>Maps</span></a>
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    wireEventCardButtons(out);
+  }
+
+  function hl(text, q) {
+    if (!q) return escapeHTML(text);
+    const idx = text.toLowerCase().indexOf(q);
+    if (idx === -1) return escapeHTML(text);
+    return escapeHTML(text.slice(0, idx)) + `<mark class="hl">${escapeHTML(text.slice(idx, idx + q.length))}</mark>` + escapeHTML(text.slice(idx + q.length));
+  }
+
+  input.addEventListener('input', () => doSearch(input.value));
+  clear.addEventListener('click', () => { input.value = ''; doSearch(''); input.focus(); });
+  setTimeout(() => input.focus(), 80);
+}
+
+/* =============================================================
+   COMMON WIRING
+   ============================================================= */
+function wireEventCardButtons(root) {
+  $$('[data-copy]', root).forEach(btn => {
+    btn.addEventListener('click', () => {
+      const text = btn.getAttribute('data-copy');
+      navigator.clipboard?.writeText(text).then(() => {
+        const old = btn.textContent;
+        btn.textContent = '✓ Copied';
+        setTimeout(() => { btn.textContent = old; }, 1400);
+      });
+    });
+  });
+}
+
+/* =============================================================
+   NAV / TABS / THEME
+   ============================================================= */
+function showTab(name) {
+  $$('.page').forEach(p => p.hidden = true);
+  $(`#page-${name}`).hidden = false;
+  $$('.tab').forEach(t => t.setAttribute('aria-selected', t.dataset.tab === name));
+  /* Render lazily */
+  if (name === 'today') renderToday();
+  if (name === 'itinerary') renderItinerary();
+  if (name === 'map') renderMap();
+  if (name === 'suggest') renderSuggest();
+  if (name === 'search') renderSearch();
+  /* Scroll up */
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  /* Persist tab for return */
+  try { localStorage.setItem('sof.tab', name); } catch (e) {}
+}
+
+$$('.tab').forEach(t => {
+  t.addEventListener('click', () => showTab(t.dataset.tab));
+});
+
+/* Theme */
+function initTheme() {
+  let stored = null;
+  try { stored = localStorage.getItem('sof.theme'); } catch (e) {}
+  if (stored) document.documentElement.setAttribute('data-theme', stored);
+}
+$('#themeToggle').addEventListener('click', () => {
+  const cur = document.documentElement.getAttribute('data-theme') ||
+    (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('sof.theme', next); } catch (e) {}
+});
+
+/* =============================================================
+   PWA — MANIFEST + SERVICE WORKER (inlined as Blob URLs)
+   This is how we keep everything in a single .html file.
+   ============================================================= */
+function setupPWA() {
+  /* Manifest */
+  const manifest = {
+    name: 'South of France · Beukelman 2026',
+    short_name: 'South of France',
+    description: 'Trip companion for the Beukelman South of France trip.',
+    start_url: location.pathname,
+    scope: location.pathname,
+    display: 'standalone',
+    orientation: 'portrait',
+    background_color: '#f5ede1',
+    theme_color: '#1a3a3a',
+    icons: [
+      {
+        src: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%231a3a3a'/><stop offset='1' stop-color='%23d97757'/></linearGradient></defs><rect width='512' height='512' rx='112' fill='url(%23g)'/><text x='50%25' y='50%25' text-anchor='middle' font-family='Georgia,serif' font-size='150' font-style='italic' fill='%23f5ede1' dominant-baseline='central'>SoF</text><text x='50%25' y='78%25' text-anchor='middle' font-family='Georgia,serif' font-size='38' fill='%23f5ede1' opacity='0.85' letter-spacing='8'>MAY · 2026</text></svg>",
+        sizes: '512x512',
+        type: 'image/svg+xml',
+        purpose: 'any maskable'
+      }
+    ],
+  };
+  const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
+  const manifestUrl = URL.createObjectURL(manifestBlob);
+  $('#manifest-link').setAttribute('href', manifestUrl);
+
+  /* Service worker — only register if we're served over http(s) and the page
+     has a real URL (file:// and srcdoc iframes can't host SWs). */
+  if (!('serviceWorker' in navigator)) return;
+  if (location.protocol !== 'http:' && location.protocol !== 'https:') return;
+
+  const swCode = `
+    const CACHE = 'sof-v1';
+    const SHELL_URL = ${JSON.stringify(location.href)};
+    self.addEventListener('install', e => {
+      e.waitUntil((async () => {
+        const cache = await caches.open(CACHE);
+        try { await cache.add(new Request(SHELL_URL, { cache: 'reload' })); } catch (err) {}
+        self.skipWaiting();
+      })());
+    });
+    self.addEventListener('activate', e => {
+      e.waitUntil((async () => {
+        const keys = await caches.keys();
+        await Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)));
+        await self.clients.claim();
+      })());
+    });
+    self.addEventListener('fetch', e => {
+      const req = e.request;
+      if (req.method !== 'GET') return;
+      const url = new URL(req.url);
+      /* Don't try to cache map deep-links or external APIs */
+      if (url.origin !== location.origin && !url.hostname.includes('fonts.googleapis.com') && !url.hostname.includes('fonts.gstatic.com')) return;
+      e.respondWith((async () => {
+        const cache = await caches.open(CACHE);
+        const cached = await cache.match(req);
+        if (cached) {
+          /* Background refresh */
+          fetch(req).then(resp => { if (resp && resp.ok) cache.put(req, resp.clone()); }).catch(()=>{});
+          return cached;
+        }
+        try {
+          const resp = await fetch(req);
+          if (resp && resp.ok) cache.put(req, resp.clone());
+          return resp;
+        } catch (err) {
+          /* Offline fallback: serve cached shell */
+          const shell = await cache.match(SHELL_URL);
+          if (shell) return shell;
+          return new Response('Offline', { status: 503 });
+        }
+      })());
+    });
+  `;
+  const swBlob = new Blob([swCode], { type: 'text/javascript' });
+  const swUrl = URL.createObjectURL(swBlob);
+  navigator.serviceWorker.register(swUrl, { scope: location.pathname }).catch(() => {
+    /* Blob-URL service workers aren't supported in every browser; that's OK.
+       The app still works fully online and most assets are cached by the browser. */
+  });
+}
+
+/* Offline indicator */
+function setupOfflineIndicator() {
+  const pill = $('#statusPill');
+  function update() {
+    if (!navigator.onLine) {
+      pill.textContent = 'Offline · cached data';
+      pill.className = 'status-pill show offline';
+      setTimeout(() => pill.classList.remove('show'), 2500);
+    }
+  }
+  window.addEventListener('online', () => { pill.classList.remove('show'); });
+  window.addEventListener('offline', update);
+  if (!navigator.onLine) update();
+}
+
+/* =============================================================
+   BOOT
+   ============================================================= */
+initTheme();
+let initialTab = 'today';
+try {
+  const saved = localStorage.getItem('sof.tab');
+  if (saved && ['today','itinerary','map','suggest','search'].includes(saved)) initialTab = saved;
+} catch (e) {}
+showTab(initialTab);
+setupPWA();
+setupOfflineIndicator();
+
+/* Re-render Today every minute so "now/next" stays fresh */
+setInterval(() => {
+  if (!$('#page-today').hidden) renderToday();
+}, 60000);
+</script>
+</body>
+</html>
